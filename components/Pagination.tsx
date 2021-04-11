@@ -13,6 +13,10 @@ const Pagination: FC<{ page: number; pageQuantity: number; query: string }> = ({
   useEffect(() => {
     router.events.on('routeChangeComplete', () => setIsPaginatorDisabled(false));
     router.events.on('routeChangeError', () => setIsPaginatorDisabled(false));
+    return () => {
+      router.events.off('routeChangeComplete', () => setIsPaginatorDisabled(false));
+      router.events.off('routeChangeError', () => setIsPaginatorDisabled(false));
+    };
   }, []);
 
   // constants

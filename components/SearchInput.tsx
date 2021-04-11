@@ -18,6 +18,10 @@ const SearchInput: FC<{ styles?: InputGroupProps }> = ({ styles }) => {
   useEffect(() => {
     router.events.on('routeChangeComplete', () => setIsDisabled(false));
     router.events.on('routeChangeError', () => setIsDisabled(false));
+    return () => {
+      router.events.off('routeChangeComplete', () => setIsDisabled(false));
+      router.events.off('routeChangeError', () => setIsDisabled(false));
+    };
   }, []);
 
   return (
